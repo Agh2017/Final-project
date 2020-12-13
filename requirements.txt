@@ -13,3 +13,4 @@ selenium==3.141.0
 toml==0.10.2
 urllib3==1.26.2
 zipp==3.4.0
+# start on command: pip install -r requirements.txt
