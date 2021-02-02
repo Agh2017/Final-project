@@ -15,7 +15,4 @@ def test_guest_should_see_login_link(browser):
     page.should_be_login_link()
 
 
-def should_be_login_link(self):
-    self.browser.find_element(By.CSS_SELECTOR, "#login_link")  # makes test red
-
 # start on command: pytest -v --tb=line --language=en test_main_page.py
