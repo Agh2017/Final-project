@@ -1,48 +1,38 @@
-from pages.base_page import BasePage
-from locators import ProductPageLocators
+from .base_page import BasePage
+from .locators import ProductPageLocators
 
 
 class ProductPage(BasePage):
-    product_name = ''
-    product_price = ''
-    product_decription = ''
+    def should_be_add_to_basket_btn(self):
+        assert self.is_element_present(*ProductPageLocators.BASKET_ADD_BTN), "Add to basket button isn't presented"
 
-    def add_product_to_basket(self):
-        self.should_be_name()
-        self.should_be_price()
-        self.should_be_decription()
-        self.should_be_add_button()
+    def add_item_to_basket(self):
+        add_item_btn = self.browser.find_element(*ProductPageLocators.BASKET_ADD_BTN)
+        add_item_btn.click()
 
-        btn = self.browser.find_element(*ProductPageLocators.BTN_ADD_TO_BASKET)
-        btn.click()
-        self.solve_quiz_and_get_code()
+    def should_item_in_basket(self):
+        self.should_cost_equal()
+        self.should_name_equal()
 
-        self.should_be_success()
-        self.check_success_message()
+    def should_cost_equal(self):
+        item_basket_cost = self.browser.find_element(*ProductPageLocators.BASKET_TOTAL)
+        item_product_cost = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE)
+        assert item_basket_cost.text == item_product_cost.text, "Prices in basket and in product page isn't equal"
 
-    def should_be_name(self):
-        assert self.is_element_present(*ProductPageLocators.PRODUCT_NAME), "Name of product not found"
-        self.product_name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME).text
+    def should_name_equal(self):
+        items_strong = self.browser.find_elements(*ProductPageLocators.BASKET_STRONG_NAMES)
+        product_name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME).text
+        basket_product_name = ''
+        names_equal = False
+        for item_strong in items_strong:
+            if item_strong.text == product_name:
+                names_equal = True
+        assert names_equal, "Names of product isn't equal"
 
-    def should_be_price(self):
-        assert self.is_element_present(*ProductPageLocators.PRODUCT_PRICE), "Price of product not found"
-        self.product_price = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE).text
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
 
-    def should_be_decription(self):
-        assert self.is_element_present(*ProductPageLocators.PRODUCT_DESCRIPTION), "Description of product not found"
-        self.product_decription = self.browser.find_element(*ProductPageLocators.PRODUCT_DESCRIPTION).text
-
-    def should_be_success(self):
-        assert self.is_element_present(*ProductPageLocators.SUCCESS_MESSAGES), "Message of Success added product in " \
-                                                                               "basket not found "
-
-    def should_be_add_button(self):
-        assert self.is_element_present(*ProductPageLocators.BTN_ADD_TO_BASKET), "Button 'Add to basket' is not " \
-                                                                                "presented "
-
-    def check_success_message(self):
-        msg_lst = self.browser.find_elements(*ProductPageLocators.SUCCESS_MESSAGES)
-        assert len(msg_lst) == 3, "Success message not found"
-
-        assert self.product_name == msg_lst[0].text, "Wrong name product added to basket"
-        assert self.product_price == msg_lst[2].text, "Wrong price product added to basket"
+    def should_dissapear_of_success_message (self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"

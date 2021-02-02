@@ -1,7 +1,7 @@
-import pytest
+import pytest, time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
+# from selenium.webdriver.common.by import By
 
 
 def pytest_addoption(parser):    # указываем в командной строке значение
@@ -26,8 +26,8 @@ def browser(request):
         browser = webdriver.Firefox(firefox_profile=fp)
     else:
         raise pytest.UsageError("--browser_name should be chrome or firefox")
-    browser.implicitly_wait(5)
     yield browser
+    #time.sleep(20)
     print("\nquit browser..")
     browser.quit()
 

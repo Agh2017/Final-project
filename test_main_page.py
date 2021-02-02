@@ -15,4 +15,6 @@ def test_guest_should_see_login_link(browser):
     page.should_be_login_link()
 
 
+# link = "http://selenium1py.pythonanywhere.com/ru/accounts/login/"
+
 # start on command: pytest -v --tb=line --language=en test_main_page.py
