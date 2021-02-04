@@ -28,3 +28,9 @@ class ProductPageLocators(object):
     PRODUCT_NAME = (By.CSS_SELECTOR, ".product_main h1")
     BASKET_ADD_BTN = (By.CLASS_NAME, "btn-add-to-basket")
     SUCCESS_MESSAGE = (By.CSS_SELECTOR, ".alertinner")
+
+
+class BasketPageLocators(object):
+    BASKET_BTN = (By.CSS_SELECTOR, "span > a")
+    BASKET_NO_ITEM = (By.ID, "content_inner")
+    SUCCESS_MESSAGE = (By.CSS_SELECTOR, ".basket_formset")

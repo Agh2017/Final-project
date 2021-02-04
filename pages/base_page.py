@@ -3,7 +3,7 @@ from selenium.common.exceptions import NoAlertPresentException  # в начал�
 import math
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-from .locators import BasePageLocators
+from .locators import BasePageLocators, BasketPageLocators
 
 
 class BasePage():
@@ -60,3 +60,12 @@ class BasePage():
 			return False
 
 		return True
+
+	def go_to_basket_page(self):
+		try:
+			link = self.browser.find_element(*BasketPageLocators.BASKET_BTN)
+			link.click()
+		except TimeoutException:
+			return True
+
+		return False
