@@ -1,16 +1,20 @@
 from selenium.webdriver.common.by import By
 
 
-class BasePageLocators():
+class RegisterPageLocators:
+    REGISTER_EMAIL = (By.NAME, "registration-email")
+    REGISTER_PASSWORD = (By.NAME, "registration-password1")
+    REGISTER_BTN = (By.NAME, "registration_submit")
+    REGISTER_PASSWORD_CONFIRM = (By.NAME, "registration-password2")
+
+
+class BasePageLocators:
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
-
-#
-# class MainPageLocators(object):
-#     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+    USER_ICON = (By.CSS_SELECTOR, ".icon-user")
 
 
-class LoginPageLocators(object):
+class LoginPageLocators:
     LOGIN_EMAIL = (By.ID, "id_login-username")
     LOGIN_PASSWORD = (By.ID, "id_login-password")
     LOGIN_BTN = (By.NAME, "login_submit")
@@ -21,7 +25,7 @@ class LoginPageLocators(object):
     REG_BTN = (By.NAME, "registration_submit")
 
 
-class ProductPageLocators(object):
+class ProductPageLocators:
     BASKET_TOTAL = (By.CSS_SELECTOR, ".alertinner p strong")
     BASKET_STRONG_NAMES = (By.CSS_SELECTOR, ".alertinner strong")
     PRODUCT_PRICE = (By.CSS_SELECTOR, ".product_main .price_color")
@@ -30,7 +34,7 @@ class ProductPageLocators(object):
     SUCCESS_MESSAGE = (By.CSS_SELECTOR, ".alertinner")
 
 
-class BasketPageLocators(object):
+class BasketPageLocators:
     BASKET_BTN = (By.CSS_SELECTOR, "span > a")
     BASKET_NO_ITEM = (By.ID, "content_inner")
     SUCCESS_MESSAGE = (By.CSS_SELECTOR, ".basket_formset")
